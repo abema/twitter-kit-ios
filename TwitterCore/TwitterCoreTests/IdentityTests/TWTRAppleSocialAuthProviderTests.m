@@ -40,7 +40,7 @@
 - (void)requestAccessForTwitterAccountsWithCompletion:(ACAccountStoreRequestAccessCompletionHandler)completion;
 - (void)getTwitterAccounts;
 - (void)getAuthTokenWithAccount:(ACAccount *)account completion:(TWTRAuthenticationProviderCompletion)completion;
-- (void)showActionSheetWithCompletion:(TWTRAuthenticationProviderCompletion)completion;
+- (void)showAlertControllerWithCompletion:(TWTRAuthenticationProviderCompletion)completion;
 
 @end
 
@@ -62,7 +62,7 @@
     id partialMockForSocialProvider = [OCMockObject partialMockForObject:self.appleSocialProvider];
     [[[partialMockForSocialProvider stub] andCall:@selector(mockRequestAccessForTwitterAccountsWithCompletion:) onObject:self] requestAccessForTwitterAccountsWithCompletion:[OCMArg any]];
     [[[partialMockForSocialProvider stub] andCall:@selector(mockGetTwitterAccounts2Account) onObject:self] getTwitterAccounts];
-    [[[partialMockForSocialProvider stub] andCall:@selector(mockShowActionSheetWithCompletion:) onObject:self] showActionSheetWithCompletion:[OCMArg any]];
+    [[[partialMockForSocialProvider stub] andCall:@selector(mockShowAlertControllerWithCompletion:) onObject:self] showAlertControllerWithCompletion:[OCMArg any]];
     [self.appleSocialProvider authenticateWithCompletion:^(NSDictionary *responseObject, NSError *error) {
         XCTAssertNotNil(responseObject);
         XCTAssertNil(error);
@@ -149,7 +149,7 @@
     completion([NSDictionary dictionary], nil);
 }
 
-- (void)mockShowActionSheetWithCompletion:(TWTRAuthenticationProviderCompletion)completion
+- (void)mockShowAlertControllerWithCompletion:(TWTRAuthenticationProviderCompletion)completion
 {
     completion([NSDictionary dictionary], nil);
 }
